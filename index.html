@@ -59,13 +59,13 @@
         <!-- Alianzas -->
         <div>
           <div class="flex flex-wrap justify-center gap-2" id="allianceContainer">
-            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="LFO">LFO</button>
-            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="BLO">BLO</button>
-            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="KOR">KOR</button>
-            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="POL">POL</button>
-            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="NEX">NEX</button>
-            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="PXR">PXR</button>
-            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="THE">The</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="LFO Lazy Farmers">LFO Lazy Farmers</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="BLO Bloodline">BLO Bloodline</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="KOR Korea">KOR Korea</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="POL Pol">POL Pol</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="NEX NEX">NEX NEX</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="PXR PHOENIX RAISING">PXR PHOENIX RAISING</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="THE The">THE The</button>
           </div>
         </div>
 
@@ -215,7 +215,7 @@
 
   <script>
     // PEGA AQUÍ TU URL DE IMPLEMENTACIÓN DE GOOGLE APPS SCRIPT
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx.../exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEbAo62L29vusW6tuODcr7V-W6BA6IcwUA20X4oL6CVCl9yLrzOlGgYikX1VIf7t6VvQ/exec";
 
     // Diccionario de los 7 idiomas (Whiteout Survival - Estado 2796)
     const translations = {
@@ -225,7 +225,7 @@
         playerPlaceholder: "Tu Nick exacto o ID",
         fireCrystal: "Cristal de Fuego",
         refined: "Cristal de Fuego Refinado",
-        fragments: "Fragmentos de Cristal de Fuego",
+        fragments: "Fragmentos",
         speedupsHeader: "Aceleradores (Días)",
         general: "General",
         training: "Entrenamiento",
@@ -248,9 +248,9 @@
         title: "State 2796 Preparation Week",
         playerName: "Player Name or ID",
         playerPlaceholder: "Your exact in-game Nick or ID",
-        fireCrystal: "Fire Crystal",
-        refined: "Refined Fire Crystal",
-        fragments: "Fire Crystal Shard",
+        fireCrystal: "Fire Crystals",
+        refined: "RFC",
+        fragments: "FC Shard",
         speedupsHeader: "Speedups (Days)",
         general: "General",
         training: "Training",
@@ -546,7 +546,7 @@
       };
 
       try {
-        await fetch(https://script.google.com/macros/s/AKfycbzEbAo62L29vusW6tuODcr7V-W6BA6IcwUA20X4oL6CVCl9yLrzOlGgYikX1VIf7t6VvQ/exec, {
+        await fetch(SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
           headers: { "Content-Type": "application/json" },
