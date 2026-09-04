@@ -221,19 +221,45 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx.../exec";
 
     // Generar opciones de 00:00 a 23:30
-    function populateTimeSelectors() {
-      const selects = ["horaLunes", "horaMartes", "horaJueves"];
-      selects.forEach(id => {
-        const el = document.getElementById(id);
-        el.innerHTML = `<option value="No participa">-- No participa --</option>`;
-        for (let h = 0; h < 24; h++) {
-          for (let m = 0; m < 60; m += 30) {
-            const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-            el.innerHTML += `<option value="${timeStr}">${timeStr}</option>`;
-          }
-        }
-      });
+    async function populateTimeSelectors() {
+  const selects = {
+    horaLunes: "lunes",
+    horaMartes: "martes",
+    horaJueves: "jueves"
+  };
+
+  let ocupados = { lunes: [], martes: [], jueves: [] };
+
+  // Consultar horas ocupadas a Google Sheets
+  try {
+    const res = await fetch(SCRIPT_URL);
+    if (res.ok) {
+      ocupados = await res.json();
     }
+  } catch (e) {
+    console.warn("No se pudieron cargar horas ocupadas, cargando todas por defecto.", e);
+  }
+
+  // Generar opciones omitiendo las horas ocupadas
+  Object.keys(selects).forEach(selectId => {
+    const el = document.getElementById(selectId);
+    const diaClave = selects[selectId];
+    const listaOcupadas = ocupados[diaClave] || [];
+
+    el.innerHTML = `<option value="No participa">-- No participa --</option>`;
+
+    for (let h = 0; h < 24; h++) {
+      for (let m = 0; m < 60; m += 30) {
+        const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+        
+        // Si la hora está en la lista de ocupadas, la omitimos del desplegable
+        if (!listaOcupadas.includes(timeStr)) {
+          el.innerHTML += `<option value="${timeStr}">${timeStr}</option>`;
+        }
+      }
+    }
+  });
+}
     populateTimeSelectors();
 
     // Sincronizar horarios si la casilla está marcada
