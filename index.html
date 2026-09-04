@@ -23,7 +23,7 @@
     .badge-btn:hover { background-color: #1a273c; color: #e2e8f0; }
     .badge-selected { background-color: #38bdf8 !important; color: #07111e !important; font-weight: 700; border-color: #38bdf8 !important; }
     .icon-box { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    option:disabled { color: #64748b; background-color: #162032; }
+    option:disabled { color: #64748b; background-color: #141f30; }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-3 sm:p-6">
@@ -75,7 +75,7 @@
             <label id="t-fireCrystal" class="block text-[10px] tracking-wider text-slate-400 font-bold mb-1.5 uppercase text-center">Cristal de Fuego</label>
             <div class="flex items-center gap-2">
               <div class="icon-box bg-rose-950/40 border border-rose-800/50">
-                <img src="img/cristal.png" alt="Cristal" class="w-7 h-7 object-contain">
+                <img src="img/cristal.png" alt="Cristal" onerror="this.outerHTML='<span>🔥</span>'" class="w-7 h-7 object-contain">
               </div>
               <div class="flex flex-1 items-center input-box rounded-xl p-1">
                 <button type="button" class="btn-stepper w-8 h-8 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('cristalFuego', -1)">—</button>
@@ -89,7 +89,7 @@
             <label id="t-refined" class="block text-[10px] tracking-wider text-slate-400 font-bold mb-1.5 uppercase text-center">Cristal de Fuego Refinado</label>
             <div class="flex items-center gap-2">
               <div class="icon-box bg-amber-950/40 border border-amber-800/50">
-                <img src="img/refinado.png" alt="Refinado" class="w-7 h-7 object-contain">
+                <img src="img/refinado.png" alt="Refinado" onerror="this.outerHTML='<span>💎</span>'" class="w-7 h-7 object-contain">
               </div>
               <div class="flex flex-1 items-center input-box rounded-xl p-1">
                 <button type="button" class="btn-stepper w-8 h-8 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('refinado', -1)">—</button>
@@ -100,10 +100,10 @@
           </div>
 
           <div>
-            <label id="t-fragments" class="block text-[10px] tracking-wider text-slate-400 font-bold mb-1.5 uppercase text-center">Fragmentos de Cristal de Fuego</label>
+            <label id="t-fragments" class="block text-[10px] tracking-wider text-slate-400 font-bold mb-1.5 uppercase text-center">Fragmentos</label>
             <div class="flex items-center gap-2">
               <div class="icon-box bg-red-950/40 border border-red-800/50">
-                <img src="img/fragmentos.png" alt="Fragmentos" class="w-7 h-7 object-contain">
+                <img src="img/fragmentos.png" alt="Fragmentos" onerror="this.outerHTML='<span>🔺</span>'" class="w-7 h-7 object-contain">
               </div>
               <div class="flex flex-1 items-center input-box rounded-xl p-1">
                 <button type="button" class="btn-stepper w-8 h-8 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('fragmentos', -1)">—</button>
@@ -122,7 +122,7 @@
               <label id="t-general" class="block text-[10px] uppercase text-slate-400 font-semibold mb-1">General</label>
               <div class="flex items-center gap-2">
                 <div class="icon-box bg-sky-950/40 border border-sky-800/50">
-                  <img src="img/acel_general.png" alt="General" class="w-7 h-7 object-contain">
+                  <img src="img/acel_general.png" alt="General" onerror="this.outerHTML='<span>⏩</span>'" class="w-7 h-7 object-contain">
                 </div>
                 <div class="flex flex-1 items-center input-box rounded-xl p-1">
                   <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelGeneral', -1)">—</button>
@@ -136,7 +136,7 @@
               <label id="t-training" class="block text-[10px] uppercase text-slate-400 font-semibold mb-1">Entrenamiento</label>
               <div class="flex items-center gap-2">
                 <div class="icon-box bg-orange-950/40 border border-orange-800/50">
-                  <img src="img/acel_entrenamiento.png" alt="Entrenamiento" class="w-7 h-7 object-contain">
+                  <img src="img/acel_entrenamiento.png" alt="Entrenamiento" onerror="this.outerHTML='<span>⚔️</span>'" class="w-7 h-7 object-contain">
                 </div>
                 <div class="flex flex-1 items-center input-box rounded-xl p-1">
                   <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelEntrenamiento', -1)">—</button>
@@ -150,7 +150,7 @@
               <label id="t-construction" class="block text-[10px] uppercase text-slate-400 font-semibold mb-1">Construcción</label>
               <div class="flex items-center gap-2">
                 <div class="icon-box bg-emerald-950/40 border border-emerald-800/50">
-                  <img src="img/acel_construccion.png" alt="Construcción" class="w-7 h-7 object-contain">
+                  <img src="img/acel_construccion.png" alt="Construcción" onerror="this.outerHTML='<span>🔨</span>'" class="w-7 h-7 object-contain">
                 </div>
                 <div class="flex flex-1 items-center input-box rounded-xl p-1">
                   <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelConstruccion', -1)">—</button>
@@ -164,7 +164,7 @@
               <label id="t-research" class="block text-[10px] uppercase text-slate-400 font-semibold mb-1">Investigación</label>
               <div class="flex items-center gap-2">
                 <div class="icon-box bg-purple-950/40 border border-purple-800/50">
-                  <img src="img/acel_investigacion.png" alt="Investigación" class="w-7 h-7 object-contain">
+                  <img src="img/acel_investigacion.png" alt="Investigación" onerror="this.outerHTML='<span>🔬</span>'" class="w-7 h-7 object-contain">
                 </div>
                 <div class="flex flex-1 items-center input-box rounded-xl p-1">
                   <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelInvestigacion', -1)">—</button>
@@ -214,7 +214,7 @@
   </div>
 
   <script>
-    // PEGA AQUÍ TU URL DE IMPLEMENTACIÓN DE GOOGLE APPS SCRIPT
+    // URL DE IMPLEMENTACIÓN DE GOOGLE APPS SCRIPT
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEbAo62L29vusW6tuODcr7V-W6BA6IcwUA20X4oL6CVCl9yLrzOlGgYikX1VIf7t6VvQ/exec";
 
     // Diccionario de los 7 idiomas (Whiteout Survival - Estado 2796)
@@ -399,21 +399,43 @@
     let currentLang = "es";
     let occupiedTimes = { lunes: [], martes: [], jueves: [] };
 
-    // Cargar horas reservadas desde Apps Script
-    async function initTimeSelectors() {
-      try {
-        const res = await fetch(SCRIPT_URL);
-        if (res.ok) {
-          occupiedTimes = await res.json();
-        }
-      } catch (err) {
-        console.warn("No se pudo obtener la lista de horas ocupadas.", err);
-      }
+    function safeSetText(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    }
+
+    function safeSetPlaceholder(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.placeholder = text;
+    }
+
+    // Consulta de horas ocupadas con JSONP: no se bloquea por CORS ni por caché
+    function initTimeSelectors() {
       renderTimeOptions();
+      if (!SCRIPT_URL || SCRIPT_URL.includes("...")) return;
+
+      const script = document.createElement("script");
+      const cbName = "onDataLoaded_" + Math.floor(Math.random() * 1000000);
+
+      window[cbName] = function(data) {
+        if (data && !data.error) {
+          occupiedTimes = {
+            lunes: data.lunes || [],
+            martes: data.martes || [],
+            jueves: data.jueves || []
+          };
+          renderTimeOptions();
+        }
+        delete window[cbName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+      };
+
+      script.src = SCRIPT_URL + (SCRIPT_URL.includes("?") ? "&" : "?") + "callback=" + cbName + "&t=" + Date.now();
+      document.body.appendChild(script);
     }
 
     function renderTimeOptions() {
-      const t = translations[currentLang];
+      const t = translations[currentLang] || translations.es;
       const selects = [
         { id: "horaLunes", list: occupiedTimes.lunes || [] },
         { id: "horaMartes", list: occupiedTimes.martes || [] },
@@ -422,70 +444,56 @@
 
       selects.forEach(({ id, list }) => {
         const el = document.getElementById(id);
-        const currentVal = el.value;
-        el.innerHTML = `<option value="No participa">${t.noParticipate}</option>`;
-
+        if (!el) return;
+        const currentVal = el.value || "No participa";
+        
+        let html = `<option value="No participa">${t.noParticipate}</option>`;
         for (let h = 0; h < 24; h++) {
           for (let m = 0; m < 60; m += 30) {
             const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-            const isTaken = list.includes(timeStr);
+            const isTaken = Array.isArray(list) && list.includes(timeStr);
 
             if (isTaken) {
-              el.innerHTML += `<option value="${timeStr}" disabled>${timeStr} (${t.taken})</option>`;
+              html += `<option value="${timeStr}" disabled>${timeStr} (${t.taken})</option>`;
             } else {
-              el.innerHTML += `<option value="${timeStr}">${timeStr}</option>`;
+              html += `<option value="${timeStr}">${timeStr}</option>`;
             }
           }
         }
-        if (currentVal) el.value = currentVal;
-      });
-    }
+        el.innerHTML = html;
 
-    // Sincronización automática de horarios
-    document.getElementById("horaLunes").addEventListener("change", (e) => {
-      if (document.getElementById("syncSchedule").checked) {
-        syncAll(e.target.value);
-      }
-    });
-
-    document.getElementById("syncSchedule").addEventListener("change", (e) => {
-      if (e.target.checked) {
-        syncAll(document.getElementById("horaLunes").value);
-      }
-    });
-
-    function syncAll(val) {
-      ["horaMartes", "horaJueves"].forEach(id => {
-        const select = document.getElementById(id);
-        const opt = select.querySelector(`option[value="${val}"]`);
+        // Si la hora previamente elegida sigue libre, la preserva; si no, vuelve a 'No participa'
+        const opt = el.querySelector(`option[value="${currentVal}"]`);
         if (opt && !opt.disabled) {
-          select.value = val;
+          el.value = currentVal;
+        } else {
+          el.value = "No participa";
         }
       });
     }
 
-    // Cambio dinámico de idioma
     function setLanguage(lang) {
+      if (!translations[lang]) return;
       currentLang = lang;
       const t = translations[lang];
 
-      document.getElementById("t-title").textContent = t.title;
-      document.getElementById("t-playerName").textContent = t.playerName;
-      document.getElementById("jugador").placeholder = t.playerPlaceholder;
-      document.getElementById("t-fireCrystal").textContent = t.fireCrystal;
-      document.getElementById("t-refined").textContent = t.refined;
-      document.getElementById("t-fragments").textContent = t.fragments;
-      document.getElementById("t-speedupsHeader").textContent = t.speedupsHeader;
-      document.getElementById("t-general").textContent = t.general;
-      document.getElementById("t-training").textContent = t.training;
-      document.getElementById("t-construction").textContent = t.construction;
-      document.getElementById("t-research").textContent = t.research;
-      document.getElementById("t-scheduleHeader").textContent = t.scheduleHeader;
-      document.getElementById("t-syncLabel").textContent = t.syncLabel;
-      document.getElementById("t-mon").textContent = t.mon;
-      document.getElementById("t-tue").textContent = t.tue;
-      document.getElementById("t-thu").textContent = t.thu;
-      document.getElementById("submitBtn").textContent = t.submit;
+      safeSetText("t-title", t.title);
+      safeSetText("t-playerName", t.playerName);
+      safeSetPlaceholder("jugador", t.playerPlaceholder);
+      safeSetText("t-fireCrystal", t.fireCrystal);
+      safeSetText("t-refined", t.refined);
+      safeSetText("t-fragments", t.fragments);
+      safeSetText("t-speedupsHeader", t.speedupsHeader);
+      safeSetText("t-general", t.general);
+      safeSetText("t-training", t.training);
+      safeSetText("t-construction", t.construction);
+      safeSetText("t-research", t.research);
+      safeSetText("t-scheduleHeader", t.scheduleHeader);
+      safeSetText("t-syncLabel", t.syncLabel);
+      safeSetText("t-mon", t.mon);
+      safeSetText("t-tue", t.tue);
+      safeSetText("t-thu", t.thu);
+      safeSetText("submitBtn", t.submit);
 
       ["es", "en", "fr", "de", "ru", "ko", "pl"].forEach(l => {
         const btn = document.getElementById(`lang-${l}`);
@@ -499,6 +507,33 @@
       renderTimeOptions();
     }
 
+    // Sincronización automática de horarios
+    const horaLunesEl = document.getElementById("horaLunes");
+    if (horaLunesEl) {
+      horaLunesEl.addEventListener("change", (e) => {
+        const syncBox = document.getElementById("syncSchedule");
+        if (syncBox && syncBox.checked) syncAll(e.target.value);
+      });
+    }
+
+    const syncBoxEl = document.getElementById("syncSchedule");
+    if (syncBoxEl) {
+      syncBoxEl.addEventListener("change", (e) => {
+        if (e.target.checked && horaLunesEl) syncAll(horaLunesEl.value);
+      });
+    }
+
+    function syncAll(val) {
+      ["horaMartes", "horaJueves"].forEach(id => {
+        const select = document.getElementById(id);
+        if (select) {
+          const opt = select.querySelector(`option[value="${val}"]`);
+          if (opt && !opt.disabled) select.value = val;
+        }
+      });
+    }
+
+    // Manejo de botones de alianza
     let selectedAlliance = "";
     document.querySelectorAll(".alliance-btn").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -508,67 +543,81 @@
       });
     });
 
+    // Sumar / Restar recursos
     function stepVal(id, amount) {
       const input = document.getElementById(id);
+      if (!input) return;
       let val = parseInt(input.value) || 0;
       val = Math.max(0, val + amount);
       input.value = val;
     }
 
-    document.getElementById("savingsForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const t = translations[currentLang];
+    // Envío del formulario
+    const formEl = document.getElementById("savingsForm");
+    if (formEl) {
+      formEl.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const t = translations[currentLang] || translations.es;
 
-      if (!selectedAlliance) {
-        alert(t.alertAlliance);
-        return;
-      }
+        if (!selectedAlliance) {
+          alert(t.alertAlliance);
+          return;
+        }
 
-      const btn = document.getElementById("submitBtn");
-      const msg = document.getElementById("msgStatus");
+        const btn = document.getElementById("submitBtn");
+        const msg = document.getElementById("msgStatus");
 
-      btn.disabled = true;
-      btn.textContent = t.sending;
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = t.sending;
+        }
 
-      const payload = {
-        jugador: document.getElementById("jugador").value,
-        alianza: selectedAlliance,
-        cristalFuego: document.getElementById("cristalFuego").value,
-        refinado: document.getElementById("refinado").value,
-        fragmentos: document.getElementById("fragmentos").value,
-        acelGeneral: document.getElementById("acelGeneral").value,
-        acelEntrenamiento: document.getElementById("acelEntrenamiento").value,
-        acelConstruccion: document.getElementById("acelConstruccion").value,
-        acelInvestigacion: document.getElementById("acelInvestigacion").value,
-        horaLunes: document.getElementById("horaLunes").value,
-        horaMartes: document.getElementById("horaMartes").value,
-        horaJueves: document.getElementById("horaJueves").value
-      };
+        const payload = {
+          jugador: document.getElementById("jugador")?.value || "",
+          alianza: selectedAlliance,
+          cristalFuego: document.getElementById("cristalFuego")?.value || 0,
+          refinado: document.getElementById("refinado")?.value || 0,
+          fragmentos: document.getElementById("fragmentos")?.value || 0,
+          acelGeneral: document.getElementById("acelGeneral")?.value || 0,
+          acelEntrenamiento: document.getElementById("acelEntrenamiento")?.value || 0,
+          acelConstruccion: document.getElementById("acelConstruccion")?.value || 0,
+          acelInvestigacion: document.getElementById("acelInvestigacion")?.value || 0,
+          horaLunes: document.getElementById("horaLunes")?.value || "No participa",
+          horaMartes: document.getElementById("horaMartes")?.value || "No participa",
+          horaJueves: document.getElementById("horaJueves")?.value || "No participa"
+        };
 
-      try {
-        await fetch(SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
+        try {
+          await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
 
-        msg.textContent = t.success;
-        msg.className = "text-center text-xs font-semibold text-emerald-400 block";
-        document.getElementById("savingsForm").reset();
-        document.querySelectorAll(".badge-selected").forEach(b => b.classList.remove("badge-selected"));
-        selectedAlliance = "";
-        
-        // Recarga los horarios ocupados inmediatamente tras el envío
-        initTimeSelectors();
-      } catch (err) {
-        msg.textContent = t.error;
-        msg.className = "text-center text-xs font-semibold text-rose-400 block";
-      } finally {
-        btn.disabled = false;
-        btn.textContent = t.submit;
-      }
-    });
+          if (msg) {
+            msg.textContent = t.success;
+            msg.className = "text-center text-xs font-semibold text-emerald-400 block";
+          }
+          formEl.reset();
+          document.querySelectorAll(".badge-selected").forEach(b => b.classList.remove("badge-selected"));
+          selectedAlliance = "";
+
+          // Actualizar inmediatamente tras registrar
+          setTimeout(initTimeSelectors, 1500);
+        } catch (err) {
+          if (msg) {
+            msg.textContent = t.error;
+            msg.className = "text-center text-xs font-semibold text-rose-400 block";
+          }
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = t.submit;
+          }
+        }
+      });
+    }
 
     initTimeSelectors();
   </script>
