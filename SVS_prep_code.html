@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Envía tus ahorros</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #0d131f; font-family: system-ui, -apple-system, sans-serif; }
+    .card-bg { background-color: #162032; border: 1px solid #223249; }
+    .input-box { background-color: #0f172a; border: 1px solid #1e293b; }
+    .btn-stepper { background-color: #1e293b; color: #94a3b8; transition: all 0.2s; }
+    .btn-stepper:hover { background-color: #334155; color: #fff; }
+    .badge-selected { background-color: #38bdf8 !important; color: #0f172a !important; font-weight: 700; }
+    .toggle-active { background-color: #38bdf8 !important; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+  <div class="card-bg w-full max-w-2xl rounded-2xl p-6 sm:p-8 shadow-2xl text-slate-200">
+    <h1 class="text-2xl font-bold text-center mb-6 text-white tracking-wide">Envía tus ahorros</h1>
+
+    <form id="savingsForm" class="space-y-6">
+      
+      <div>
+        <label class="block text-xs uppercase tracking-wider text-slate-400 font-semibold mb-2">Nombre del Jugador</label>
+        <input type="text" id="jugador" required placeholder="Tu Nick exacto en el juego" class="w-full input-box rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition">
+      </div>
+
+      <div>
+        <label class="block text-xs uppercase tracking-wider text-slate-400 font-semibold mb-2 text-center">Selecciona tu Alianza</label>
+        <div class="flex flex-wrap justify-center gap-2" id="allianceContainer">
+          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="LFO Lazy Farmers">LFO Lazy Farmers</button>
+          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="BLO Bloodline">BLO Bloodline</button>
+          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="KOR Korea">KOR Korea</button>
+          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="POL Pol">POL Pol</button>
+          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="NEX NEX">NEX NEX</button>
+          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="PXR PHOENIX RAISING">PXR PHOENIX RAISING</button>
+          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="THE The">THE The</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-[11px] tracking-wider text-slate-400 font-semibold mb-1 uppercase text-center">Cristal de Fuego</label>
+          <div class="flex items-center input-box rounded-xl p-1">
+            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('cristalFuego', -1)">—</button>
+            <input type="number" id="cristalFuego" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
+            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('cristalFuego', 1)">+</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] tracking-wider text-slate-400 font-semibold mb-1 uppercase text-center">Refinado</label>
+          <div class="flex items-center input-box rounded-xl p-1">
+            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('refinado', -1)">—</button>
+            <input type="number" id="refinado" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
+            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('refinado', 1)">+</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] tracking-wider text-slate-400 font-semibold mb-1 uppercase text-center">Fragmentos</label>
+          <div class="flex items-center input-box rounded-xl p-1">
+            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('fragmentos', -1)">—</button>
+            <input type="number" id="fragmentos" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
+            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('fragmentos', 1)">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-[11px] font-bold text-center tracking-wider text-slate-400 uppercase mb-3">Aceleraciones (Días)</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
+          <div>
+            <label class="block text-[10px] uppercase text-slate-400 mb-1">General</label>
+            <div class="flex items-center input-box rounded-xl p-1">
+              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelGeneral', -1)">—</button>
+              <input type="number" id="acelGeneral" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
+              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelGeneral', 1)">+</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] uppercase text-slate-400 mb-1">Entrenamiento</label>
+            <div class="flex items-center input-box rounded-xl p-1">
+              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelEntrenamiento', -1)">—</button>
+              <input type="number" id="acelEntrenamiento" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
+              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelEntrenamiento', 1)">+</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] uppercase text-slate-400 mb-1">Construcción</label>
+            <div class="flex items-center input-box rounded-xl p-1">
+              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelConstruccion', -1)">—</button>
+              <input type="number" id="acelConstruccion" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
+              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelConstruccion', 1)">+</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] uppercase text-slate-400 mb-1">Investigación</label>
+            <div class="flex items-center input-box rounded-xl p-1">
+              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelInvestigacion', -1)">—</button>
+              <input type="number" id="acelInvestigacion" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
+              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelInvestigacion', 1)">+</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div>
+        <p class="text-[11px] font-bold text-center tracking-wider text-slate-400 uppercase mb-2">Posición Preferida</p>
+        <div class="grid grid-cols-3 gap-2" id="prefPosContainer">
+          <button type="button" class="pos-btn py-2 text-xs font-semibold rounded-lg bg-[#0f172a] border border-slate-700 text-slate-300" data-val="Entrenamiento">Entrenamiento</button>
+          <button type="button" class="pos-btn py-2 text-xs font-semibold rounded-lg bg-[#0f172a] border border-slate-700 text-slate-300" data-val="Investigación">Investigación</button>
+          <button type="button" class="pos-btn py-2 text-xs font-semibold rounded-lg bg-[#0f172a] border border-slate-700 text-slate-300" data-val="Construcción">Construcción</button>
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn" class="w-full py-3.5 mt-4 rounded-xl font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition duration-150">
+        Enviar tus ahorros
+      </button>
+
+      <p id="msgStatus" class="text-center text-xs font-semibold hidden"></p>
+    </form>
+  </div>
+
+  <script>
+    // PEGA AQUÍ LA URL DE IMPLEMENTACIÓN DE GOOGLE APPS SCRIPT
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEbAo62L29vusW6tuODcr7V-W6BA6IcwUA20X4oL6CVCl9yLrzOlGgYikX1VIf7t6VvQ/exec";
+
+    let selectedAlliance = "";
+    let selectedPosition = "";
+
+    // Manejo de botones de alianza
+    document.querySelectorAll(".alliance-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".alliance-btn").forEach(b => b.classList.remove("badge-selected"));
+        btn.classList.add("badge-selected");
+        selectedAlliance = btn.getAttribute("data-val");
+      });
+    });
+
+    // Manejo de botones de posición
+    document.querySelectorAll(".pos-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".pos-btn").forEach(b => b.classList.remove("badge-selected"));
+        btn.classList.add("badge-selected");
+        selectedPosition = btn.getAttribute("data-val");
+      });
+    });
+
+    // Controladores de incremento/decremento
+    function stepVal(id, amount) {
+      const input = document.getElementById(id);
+      let val = parseInt(input.value) || 0;
+      val = Math.max(0, val + amount);
+      input.value = val;
+    }
+
+    // Envío de datos
+    document.getElementById("savingsForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      if (!selectedAlliance) {
+        alert("Por favor, selecciona una alianza.");
+        return;
+      }
+
+      const btn = document.getElementById("submitBtn");
+      const msg = document.getElementById("msgStatus");
+
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
+
+      const payload = {
+        jugador: document.getElementById("jugador").value,
+        alianza: selectedAlliance,
+        cristalFuego: document.getElementById("cristalFuego").value,
+        refinado: document.getElementById("refinado").value,
+        fragmentos: document.getElementById("fragmentos").value,
+        acelGeneral: document.getElementById("acelGeneral").value,
+        acelEntrenamiento: document.getElementById("acelEntrenamiento").value,
+        acelConstruccion: document.getElementById("acelConstruccion").value,
+        acelInvestigacion: document.getElementById("acelInvestigacion").value,
+        posicionPreferida: selectedPosition || "Ninguna"
+      };
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        msg.textContent = "¡Ahorros enviados correctamente!";
+        msg.className = "text-center text-xs font-semibold text-emerald-400 block";
+        document.getElementById("savingsForm").reset();
+        document.querySelectorAll(".badge-selected").forEach(b => b.classList.remove("badge-selected"));
+      } catch (err) {
+        msg.textContent = "Error al enviar los datos. Revisa la consola.";
+        msg.className = "text-center text-xs font-semibold text-rose-400 block";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Enviar tus ahorros";
+      }
+    });
+  </script>
+</body>
+</html>
