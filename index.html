@@ -6,137 +6,354 @@
   <title>Envía tus ahorros</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background-color: #0d131f; font-family: system-ui, -apple-system, sans-serif; }
-    .card-bg { background-color: #162032; border: 1px solid #223249; }
-    .input-box { background-color: #0f172a; border: 1px solid #1e293b; }
-    .btn-stepper { background-color: #1e293b; color: #94a3b8; transition: all 0.2s; }
-    .btn-stepper:hover { background-color: #334155; color: #fff; }
-    .badge-selected { background-color: #38bdf8 !important; color: #0f172a !important; font-weight: 700; }
-    .toggle-active { background-color: #38bdf8 !important; }
+    body { background-color: #0b111c; font-family: system-ui, -apple-system, sans-serif; }
+    .card-modal {
+      background: linear-gradient(180deg, #131d2e 0%, #0d1522 100%);
+      border: 1px solid #1f2f47;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+    .top-gradient-bar {
+      height: 3px;
+      background: linear-gradient(90deg, #38bdf8 0%, #0284c7 60%, transparent 100%);
+    }
+    .input-box { background-color: #090e17; border: 1px solid #1b263b; }
+    .btn-stepper { background-color: #121c2d; color: #94a3b8; transition: all 0.15s; }
+    .btn-stepper:hover { background-color: #1e2d47; color: #fff; }
+    .badge-btn { background-color: #121c2c; color: #94a3b8; border: 1px solid #1a283e; transition: all 0.15s; }
+    .badge-btn:hover { background-color: #1a273c; color: #e2e8f0; }
+    .badge-selected { background-color: #38bdf8 !important; color: #07111e !important; font-weight: 700; border-color: #38bdf8 !important; }
+    .icon-box { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen flex items-center justify-center p-3 sm:p-6">
 
-  <div class="card-bg w-full max-w-2xl rounded-2xl p-6 sm:p-8 shadow-2xl text-slate-200">
-    <h1 class="text-2xl font-bold text-center mb-6 text-white tracking-wide">Envía tus ahorros</h1>
+  <div class="card-modal w-full max-w-2xl rounded-2xl overflow-hidden text-slate-200 relative">
+    <div class="top-gradient-bar"></div>
 
-    <form id="savingsForm" class="space-y-6">
-      
-      <div>
-        <label class="block text-xs uppercase tracking-wider text-slate-400 font-semibold mb-2">Nombre del Jugador</label>
-        <input type="text" id="jugador" required placeholder="Tu Nick exacto en el juego" class="w-full input-box rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition">
+    <!-- Barra superior: Selector de 6 Idiomas -->
+    <div class="flex justify-between items-center px-6 pt-5 pb-2">
+      <div class="flex items-center gap-1 bg-[#090e17] p-1 rounded-lg border border-slate-800 flex-wrap">
+        <button type="button" onclick="setLanguage('es')" id="lang-es" class="px-2 py-1 text-xs rounded font-bold transition bg-sky-500 text-slate-950">🇪🇸 ES</button>
+        <button type="button" onclick="setLanguage('en')" id="lang-en" class="px-2 py-1 text-xs rounded font-bold transition text-slate-400 hover:text-white">🇬🇧 EN</button>
+        <button type="button" onclick="setLanguage('fr')" id="lang-fr" class="px-2 py-1 text-xs rounded font-bold transition text-slate-400 hover:text-white">🇫🇷 FR</button>
+        <button type="button" onclick="setLanguage('de')" id="lang-de" class="px-2 py-1 text-xs rounded font-bold transition text-slate-400 hover:text-white">🇩🇪 DE</button>
+        <button type="button" onclick="setLanguage('ru')" id="lang-ru" class="px-2 py-1 text-xs rounded font-bold transition text-slate-400 hover:text-white">🇷🇺 RU</button>
+        <button type="button" onclick="setLanguage('ko')" id="lang-ko" class="px-2 py-1 text-xs rounded font-bold transition text-slate-400 hover:text-white">🇰🇷 KO</button>
       </div>
+      <div class="w-7 h-7 rounded-full bg-slate-800/60 flex items-center justify-center text-slate-500 text-xs">✕</div>
+    </div>
 
-      <div>
-        <label class="block text-xs uppercase tracking-wider text-slate-400 font-semibold mb-2 text-center">Selecciona tu Alianza</label>
-        <div class="flex flex-wrap justify-center gap-2" id="allianceContainer">
-          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="LFO Lazy Farmers">LFO Lazy Farmers</button>
-          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="BLO Bloodline">BLO Bloodline</button>
-          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="KOR Korea">KOR Korea</button>
-          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="POL Pol">POL Pol</button>
-          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="NEX NEX">NEX NEX</button>
-          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="PXR PHOENIX RAISING">PXR PHOENIX RAISING</button>
-          <button type="button" class="alliance-btn text-xs px-3 py-1.5 rounded-full bg-[#1e293b] text-slate-300 font-medium" data-val="THE The">THE The</button>
-        </div>
-      </div>
+    <!-- Formulario -->
+    <div class="px-6 pb-6 pt-2">
+      <h1 id="t-title" class="text-xl sm:text-2xl font-bold text-center mb-5 text-white tracking-wide">Envía tus ahorros</h1>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <form id="savingsForm" class="space-y-5">
+        
+        <!-- Nombre Jugador -->
         <div>
-          <label class="block text-[11px] tracking-wider text-slate-400 font-semibold mb-1 uppercase text-center">Cristal de Fuego</label>
-          <div class="flex items-center input-box rounded-xl p-1">
-            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('cristalFuego', -1)">—</button>
-            <input type="number" id="cristalFuego" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
-            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('cristalFuego', 1)">+</button>
+          <label id="t-playerName" class="block text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1.5">Nombre del Jugador</label>
+          <input type="text" id="jugador" required placeholder="Tu Nick exacto" class="w-full input-box rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-sky-500 transition">
+        </div>
+
+        <!-- Alianzas -->
+        <div>
+          <div class="flex flex-wrap justify-center gap-2" id="allianceContainer">
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="LFO Lazy Farmers">LFO Lazy Farmers</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="BLO Bloodline">BLO Bloodline</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="KOR Korea">KOR Korea</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="POL Pol">POL Pol</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="NEX NEX">NEX NEX</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="PXR PHOENIX RAISING">PXR PHOENIX RAISING</button>
+            <button type="button" class="alliance-btn badge-btn text-xs px-3 py-1.5 rounded-full" data-val="THE The">THE The</button>
           </div>
         </div>
 
-        <div>
-          <label class="block text-[11px] tracking-wider text-slate-400 font-semibold mb-1 uppercase text-center">Refinado</label>
-          <div class="flex items-center input-box rounded-xl p-1">
-            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('refinado', -1)">—</button>
-            <input type="number" id="refinado" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
-            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('refinado', 1)">+</button>
+        <!-- Recursos -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+          <div>
+            <label id="t-fireCrystal" class="block text-[10px] tracking-wider text-slate-400 font-bold mb-1.5 uppercase text-center">Cristal de Fuego</label>
+            <div class="flex items-center gap-2">
+              <div class="icon-box bg-rose-950/40 border border-rose-800/50">
+                <img src="img/cristal.png" alt="Cristal" class="w-7 h-7 object-contain">
+              </div>
+              <div class="flex flex-1 items-center input-box rounded-xl p-1">
+                <button type="button" class="btn-stepper w-8 h-8 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('cristalFuego', -1)">—</button>
+                <input type="number" id="cristalFuego" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold text-sm">
+                <button type="button" class="btn-stepper w-8 h-8 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('cristalFuego', 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label id="t-refined" class="block text-[10px] tracking-wider text-slate-400 font-bold mb-1.5 uppercase text-center">Refinado</label>
+            <div class="flex items-center gap-2">
+              <div class="icon-box bg-amber-950/40 border border-amber-800/50">
+                <img src="img/refinado.png" alt="Refinado" class="w-7 h-7 object-contain">
+              </div>
+              <div class="flex flex-1 items-center input-box rounded-xl p-1">
+                <button type="button" class="btn-stepper w-8 h-8 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('refinado', -1)">—</button>
+                <input type="number" id="refinado" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold text-sm">
+                <button type="button" class="btn-stepper w-8 h-8 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('refinado', 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label id="t-fragments" class="block text-[10px] tracking-wider text-slate-400 font-bold mb-1.5 uppercase text-center">Fragmentos</label>
+            <div class="flex items-center gap-2">
+              <div class="icon-box bg-red-950/40 border border-red-800/50">
+                <img src="img/fragmentos.png" alt="Fragmentos" class="w-7 h-7 object-contain">
+              </div>
+              <div class="flex flex-1 items-center input-box rounded-xl p-1">
+                <button type="button" class="btn-stepper w-8 h-8 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('fragmentos', -1)">—</button>
+                <input type="number" id="fragmentos" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold text-sm">
+                <button type="button" class="btn-stepper w-8 h-8 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('fragmentos', 1)">+</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div>
-          <label class="block text-[11px] tracking-wider text-slate-400 font-semibold mb-1 uppercase text-center">Fragmentos</label>
-          <div class="flex items-center input-box rounded-xl p-1">
-            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('fragmentos', -1)">—</button>
-            <input type="number" id="fragmentos" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
-            <button type="button" class="btn-stepper w-9 h-9 rounded-lg flex items-center justify-center font-bold" onclick="stepVal('fragmentos', 1)">+</button>
+        <!-- Aceleraciones -->
+        <div class="pt-2">
+          <p id="t-speedupsHeader" class="text-[11px] font-bold text-center tracking-wider text-slate-400 uppercase mb-3">Aceleraciones (Días)</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label id="t-general" class="block text-[10px] uppercase text-slate-400 font-semibold mb-1">General</label>
+              <div class="flex items-center gap-2">
+                <div class="icon-box bg-sky-950/40 border border-sky-800/50">
+                  <img src="img/acel_general.png" alt="Aceleración General" class="w-7 h-7 object-contain">
+                </div>
+                <div class="flex flex-1 items-center input-box rounded-xl p-1">
+                  <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelGeneral', -1)">—</button>
+                  <input type="number" id="acelGeneral" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold text-sm">
+                  <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelGeneral', 1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label id="t-training" class="block text-[10px] uppercase text-slate-400 font-semibold mb-1">Entrenamiento</label>
+              <div class="flex items-center gap-2">
+                <div class="icon-box bg-orange-950/40 border border-orange-800/50">
+                  <img src="img/acel_entrenamiento.png" alt="Aceleración Entrenamiento" class="w-7 h-7 object-contain">
+                </div>
+                <div class="flex flex-1 items-center input-box rounded-xl p-1">
+                  <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelEntrenamiento', -1)">—</button>
+                  <input type="number" id="acelEntrenamiento" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold text-sm">
+                  <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelEntrenamiento', 1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label id="t-construction" class="block text-[10px] uppercase text-slate-400 font-semibold mb-1">Construcción</label>
+              <div class="flex items-center gap-2">
+                <div class="icon-box bg-emerald-950/40 border border-emerald-800/50">
+                  <img src="img/acel_construccion.png" alt="Aceleración Construcción" class="w-7 h-7 object-contain">
+                </div>
+                <div class="flex flex-1 items-center input-box rounded-xl p-1">
+                  <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelConstruccion', -1)">—</button>
+                  <input type="number" id="acelConstruccion" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold text-sm">
+                  <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelConstruccion', 1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label id="t-research" class="block text-[10px] uppercase text-slate-400 font-semibold mb-1">Investigación</label>
+              <div class="flex items-center gap-2">
+                <div class="icon-box bg-purple-950/40 border border-purple-800/50">
+                  <img src="img/acel_investigacion.png" alt="Aceleración Investigación" class="w-7 h-7 object-contain">
+                </div>
+                <div class="flex flex-1 items-center input-box rounded-xl p-1">
+                  <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelInvestigacion', -1)">—</button>
+                  <input type="number" id="acelInvestigacion" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold text-sm">
+                  <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelInvestigacion', 1)">+</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div>
-        <p class="text-[11px] font-bold text-center tracking-wider text-slate-400 uppercase mb-3">Aceleraciones (Días)</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Inscripción de Horarios -->
+        <div class="pt-2 border-t border-slate-800/80">
+          <p id="t-scheduleHeader" class="text-[11px] font-bold text-center tracking-wider text-slate-400 uppercase mb-2">Inscripción por Día y Horario</p>
           
-          <div>
-            <label class="block text-[10px] uppercase text-slate-400 mb-1">General</label>
-            <div class="flex items-center input-box rounded-xl p-1">
-              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelGeneral', -1)">—</button>
-              <input type="number" id="acelGeneral" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
-              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelGeneral', 1)">+</button>
-            </div>
+          <!-- Botón de Sincronización -->
+          <div class="flex items-center justify-center gap-2 mb-4">
+            <input type="checkbox" id="syncSchedule" class="rounded accent-sky-500 w-4 h-4 cursor-pointer">
+            <label for="syncSchedule" id="t-syncLabel" class="text-xs text-sky-400 font-medium cursor-pointer">Aplicar el horario del Lunes a todos los días</label>
           </div>
 
-          <div>
-            <label class="block text-[10px] uppercase text-slate-400 mb-1">Entrenamiento</label>
-            <div class="flex items-center input-box rounded-xl p-1">
-              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelEntrenamiento', -1)">—</button>
-              <input type="number" id="acelEntrenamiento" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
-              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelEntrenamiento', 1)">+</button>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- Lunes -->
+            <div>
+              <label id="t-mon" class="block text-[10px] uppercase text-slate-400 font-semibold mb-1">Lunes (Construcción)</label>
+              <select id="horaLunes" class="w-full input-box rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-sky-500 schedule-select"></select>
+            </div>
+
+            <!-- Martes -->
+            <div>
+              <label id="t-tue" class="block text-[10px] uppercase text-slate-400 font-semibold mb-1">Martes (Investigación)</label>
+              <select id="horaMartes" class="w-full input-box rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-sky-500 schedule-select"></select>
+            </div>
+
+            <!-- Jueves -->
+            <div>
+              <label id="t-thu" class="block text-[10px] uppercase text-slate-400 font-semibold mb-1">Jueves (Entrenamiento)</label>
+              <select id="horaJueves" class="w-full input-box rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-sky-500 schedule-select"></select>
             </div>
           </div>
-
-          <div>
-            <label class="block text-[10px] uppercase text-slate-400 mb-1">Construcción</label>
-            <div class="flex items-center input-box rounded-xl p-1">
-              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelConstruccion', -1)">—</button>
-              <input type="number" id="acelConstruccion" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
-              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelConstruccion', 1)">+</button>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-[10px] uppercase text-slate-400 mb-1">Investigación</label>
-            <div class="flex items-center input-box rounded-xl p-1">
-              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelInvestigacion', -1)">—</button>
-              <input type="number" id="acelInvestigacion" value="0" min="0" class="w-full bg-transparent text-center text-white focus:outline-none font-semibold">
-              <button type="button" class="btn-stepper w-8 h-8 rounded-lg" onclick="stepVal('acelInvestigacion', 1)">+</button>
-            </div>
-          </div>
-
         </div>
-      </div>
 
-      <div>
-        <p class="text-[11px] font-bold text-center tracking-wider text-slate-400 uppercase mb-2">Posición Preferida</p>
-        <div class="grid grid-cols-3 gap-2" id="prefPosContainer">
-          <button type="button" class="pos-btn py-2 text-xs font-semibold rounded-lg bg-[#0f172a] border border-slate-700 text-slate-300" data-val="Entrenamiento">Entrenamiento</button>
-          <button type="button" class="pos-btn py-2 text-xs font-semibold rounded-lg bg-[#0f172a] border border-slate-700 text-slate-300" data-val="Investigación">Investigación</button>
-          <button type="button" class="pos-btn py-2 text-xs font-semibold rounded-lg bg-[#0f172a] border border-slate-700 text-slate-300" data-val="Construcción">Construcción</button>
-        </div>
-      </div>
+        <!-- Botón de Envío -->
+        <button type="submit" id="submitBtn" class="w-full py-3.5 mt-4 rounded-xl font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition duration-150">
+          Enviar tus ahorros
+        </button>
 
-      <button type="submit" id="submitBtn" class="w-full py-3.5 mt-4 rounded-xl font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition duration-150">
-        Enviar tus ahorros
-      </button>
-
-      <p id="msgStatus" class="text-center text-xs font-semibold hidden"></p>
-    </form>
+        <p id="msgStatus" class="text-center text-xs font-semibold hidden"></p>
+      </form>
+    </div>
   </div>
 
   <script>
-    // PEGA AQUÍ LA URL DE IMPLEMENTACIÓN DE GOOGLE APPS SCRIPT
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEbAo62L29vusW6tuODcr7V-W6BA6IcwUA20X4oL6CVCl9yLrzOlGgYikX1VIf7t6VvQ/exec";
+    // PEGA AQUÍ TU URL DE IMPLEMENTACIÓN DE GOOGLE APPS SCRIPT
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx.../exec";
+
+    // Generar opciones de 00:00 a 23:30
+    function populateTimeSelectors() {
+      const selects = ["horaLunes", "horaMartes", "horaJueves"];
+      selects.forEach(id => {
+        const el = document.getElementById(id);
+        el.innerHTML = `<option value="No participa">-- No participa --</option>`;
+        for (let h = 0; h < 24; h++) {
+          for (let m = 0; m < 60; m += 30) {
+            const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+            el.innerHTML += `<option value="${timeStr}">${timeStr}</option>`;
+          }
+        }
+      });
+    }
+    populateTimeSelectors();
+
+    // Sincronizar horarios si la casilla está marcada
+    document.getElementById("horaLunes").addEventListener("change", (e) => {
+      if (document.getElementById("syncSchedule").checked) {
+        document.getElementById("horaMartes").value = e.target.value;
+        document.getElementById("horaJueves").value = e.target.value;
+      }
+    });
+
+    document.getElementById("syncSchedule").addEventListener("change", (e) => {
+      if (e.target.checked) {
+        const val = document.getElementById("horaLunes").value;
+        document.getElementById("horaMartes").value = val;
+        document.getElementById("horaJueves").value = val;
+      }
+    });
+
+    // Diccionario con los 6 idiomas
+    const translations = {
+      es: {
+        title: "Envía tus ahorros", playerName: "Nombre del Jugador", playerPlaceholder: "Tu Nick exacto",
+        fireCrystal: "Cristal de Fuego", refined: "Refinado", fragments: "Fragmentos",
+        speedupsHeader: "Aceleraciones (Días)", general: "General", training: "Entrenamiento",
+        construction: "Construcción", research: "Investigación",
+        scheduleHeader: "Inscripción por Día y Horario", syncLabel: "Aplicar el horario del Lunes a todos los días",
+        mon: "Lunes (Construcción)", tue: "Martes (Investigación)", thu: "Jueves (Entrenamiento)",
+        submit: "Enviar tus ahorros", sending: "Enviando...", success: "¡Ahorros enviados correctamente!",
+        error: "Error al enviar los datos.", alertAlliance: "Por favor, selecciona una alianza."
+      },
+      en: {
+        title: "Submit your savings", playerName: "Player Name", playerPlaceholder: "Your exact in-game Nick",
+        fireCrystal: "Fire Crystal", refined: "Refined", fragments: "Fragments",
+        speedupsHeader: "Speedups (Days)", general: "General", training: "Training",
+        construction: "Construction", research: "Research",
+        scheduleHeader: "Sign-up by Day and Time", syncLabel: "Apply Monday's time to all days",
+        mon: "Monday (Construction)", tue: "Tuesday (Research)", thu: "Thursday (Training)",
+        submit: "Submit your savings", sending: "Submitting...", success: "Savings submitted successfully!",
+        error: "Error submitting data.", alertAlliance: "Please select an alliance."
+      },
+      fr: {
+        title: "Envoyez vos économies", playerName: "Nom du joueur", playerPlaceholder: "Votre pseudo exact",
+        fireCrystal: "Cristal de feu", refined: "Raffiné", fragments: "Fragments",
+        speedupsHeader: "Accélérations (Jours)", general: "Général", training: "Entraînement",
+        construction: "Construction", research: "Recherche",
+        scheduleHeader: "Inscription par Jour et Heure", syncLabel: "Appliquer l'horaire du lundi à tous les jours",
+        mon: "Lundi (Construction)", tue: "Mardi (Recherche)", thu: "Jeudi (Entraînement)",
+        submit: "Envoyer vos économies", sending: "Envoi en cours...", success: "Données envoyées avec succès !",
+        error: "Erreur lors de l'envoi.", alertAlliance: "Veuillez sélectionner une alliance."
+      },
+      de: {
+        title: "Ersparnisse senden", playerName: "Spielername", playerPlaceholder: "Genauer Nickname",
+        fireCrystal: "Feuerkristall", refined: "Veredelt", fragments: "Fragmente",
+        speedupsHeader: "Beschleunigungen (Tage)", general: "Allgemein", training: "Training",
+        construction: "Bau", research: "Forschung",
+        scheduleHeader: "Anmeldung nach Tag und Uhrzeit", syncLabel: "Montagszeit auf alle Tage anwenden",
+        mon: "Montag (Bau)", tue: "Dienstag (Forschung)", thu: "Donnerstag (Training)",
+        submit: "Ersparnisse absenden", sending: "Wird gesendet...", success: "Erfolgreich abgesendet!",
+        error: "Fehler beim Senden.", alertAlliance: "Bitte wählen Sie eine Allianz."
+      },
+      ru: {
+        title: "Отправить накопления", playerName: "Имя игрока", playerPlaceholder: "Ваш точный ник",
+        fireCrystal: "Огненный кристалл", refined: "Очищенный", fragments: "Фрагменты",
+        speedupsHeader: "Ускорения (Дни)", general: "Общие", training: "Тренировка",
+        construction: "Строительство", research: "Исследование",
+        scheduleHeader: "Запись по дням и времени", syncLabel: "Применить время понедельника ко всем дням",
+        mon: "Понедельник (Строительство)", tue: "Вторник (Исследование)", thu: "Четверг (Тренировка)",
+        submit: "Отправить накопления", sending: "Отправка...", success: "Данные успешно отправлены!",
+        error: "Ошибка при отправке.", alertAlliance: "Пожалуйста, выберите альянс."
+      },
+      ko: {
+        title: "저축량 제출", playerName: "플레이어 이름", playerPlaceholder: "정확한 닉네임 입력",
+        fireCrystal: "불의 수정", refined: "정제된 수정", fragments: "파편",
+        speedupsHeader: "가속 (일)", general: "일반", training: "훈련",
+        construction: "건설", research: "연구",
+        scheduleHeader: "요일 및 시간대 등록", syncLabel: "월요일 시간을 모든 요일에 적용",
+        mon: "월요일 (건설)", tue: "화요일 (연구)", thu: "목요일 (훈련)",
+        submit: "저축량 제출", sending: "제출 중...", success: "성공적으로 제출되었습니다!",
+        error: "전송 중 오류가 발생했습니다.", alertAlliance: "연맹을 선택해 주세요."
+      }
+    };
+
+    let currentLang = "es";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+
+      document.getElementById("t-title").textContent = t.title;
+      document.getElementById("t-playerName").textContent = t.playerName;
+      document.getElementById("jugador").placeholder = t.playerPlaceholder;
+      document.getElementById("t-fireCrystal").textContent = t.fireCrystal;
+      document.getElementById("t-refined").textContent = t.refined;
+      document.getElementById("t-fragments").textContent = t.fragments;
+      document.getElementById("t-speedupsHeader").textContent = t.speedupsHeader;
+      document.getElementById("t-general").textContent = t.general;
+      document.getElementById("t-training").textContent = t.training;
+      document.getElementById("t-construction").textContent = t.construction;
+      document.getElementById("t-research").textContent = t.research;
+      document.getElementById("t-scheduleHeader").textContent = t.scheduleHeader;
+      document.getElementById("t-syncLabel").textContent = t.syncLabel;
+      document.getElementById("t-mon").textContent = t.mon;
+      document.getElementById("t-tue").textContent = t.tue;
+      document.getElementById("t-thu").textContent = t.thu;
+      document.getElementById("submitBtn").textContent = t.submit;
+
+      // Resaltar bandera activa
+      ["es", "en", "fr", "de", "ru", "ko"].forEach(l => {
+        const btn = document.getElementById(`lang-${l}`);
+        if (btn) {
+          if (l === lang) {
+            btn.className = "px-2 py-1 text-xs rounded font-bold transition bg-sky-500 text-slate-950";
+          } else {
+            btn.className = "px-2 py-1 text-xs rounded font-bold transition text-slate-400 hover:text-white";
+          }
+        }
+      });
+    }
 
     let selectedAlliance = "";
-    let selectedPosition = "";
-
-    // Manejo de botones de alianza
     document.querySelectorAll(".alliance-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".alliance-btn").forEach(b => b.classList.remove("badge-selected"));
@@ -145,16 +362,6 @@
       });
     });
 
-    // Manejo de botones de posición
-    document.querySelectorAll(".pos-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".pos-btn").forEach(b => b.classList.remove("badge-selected"));
-        btn.classList.add("badge-selected");
-        selectedPosition = btn.getAttribute("data-val");
-      });
-    });
-
-    // Controladores de incremento/decremento
     function stepVal(id, amount) {
       const input = document.getElementById(id);
       let val = parseInt(input.value) || 0;
@@ -162,12 +369,12 @@
       input.value = val;
     }
 
-    // Envío de datos
     document.getElementById("savingsForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      
+      const t = translations[currentLang];
+
       if (!selectedAlliance) {
-        alert("Por favor, selecciona una alianza.");
+        alert(t.alertAlliance);
         return;
       }
 
@@ -175,7 +382,7 @@
       const msg = document.getElementById("msgStatus");
 
       btn.disabled = true;
-      btn.textContent = "Enviando...";
+      btn.textContent = t.sending;
 
       const payload = {
         jugador: document.getElementById("jugador").value,
@@ -187,7 +394,9 @@
         acelEntrenamiento: document.getElementById("acelEntrenamiento").value,
         acelConstruccion: document.getElementById("acelConstruccion").value,
         acelInvestigacion: document.getElementById("acelInvestigacion").value,
-        posicionPreferida: selectedPosition || "Ninguna"
+        horaLunes: document.getElementById("horaLunes").value,
+        horaMartes: document.getElementById("horaMartes").value,
+        horaJueves: document.getElementById("horaJueves").value
       };
 
       try {
@@ -198,16 +407,17 @@
           body: JSON.stringify(payload)
         });
 
-        msg.textContent = "¡Ahorros enviados correctamente!";
+        msg.textContent = t.success;
         msg.className = "text-center text-xs font-semibold text-emerald-400 block";
         document.getElementById("savingsForm").reset();
         document.querySelectorAll(".badge-selected").forEach(b => b.classList.remove("badge-selected"));
+        selectedAlliance = "";
       } catch (err) {
-        msg.textContent = "Error al enviar los datos. Revisa la consola.";
+        msg.textContent = t.error;
         msg.className = "text-center text-xs font-semibold text-rose-400 block";
       } finally {
         btn.disabled = false;
-        btn.textContent = "Enviar tus ahorros";
+        btn.textContent = t.submit;
       }
     });
   </script>
